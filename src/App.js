@@ -2,12 +2,19 @@
 import React, {useState} from "react";
 import "./App.css";
 import BottomRow from "./BottomRow";
+import NewBottomRow from "./NewBottomRow";
 
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
 
   const [lionScore, setLionScore] = useState(0);
   const [tigerScore, setTigerScore] = useState(0);
+
+  const [downValue, setDownValue] = useState(1);
+
+  const downFunc = newVar => {
+    setDownValue(newVar);
+  };
 
   return (
     <div className="container">
@@ -26,7 +33,7 @@ function App() {
             <div className="away__score">{tigerScore}</div>
           </div>
         </div>
-        <BottomRow />
+        <BottomRow downValue={downValue}/>
       </section>
       <section className="buttons">
         <div className="homeButtons">
@@ -39,6 +46,7 @@ function App() {
           <button className="awayButtons__fieldGoal" onClick={ ()=> setTigerScore(tigerScore+3)}>Away Field Goal</button>
         </div>
       </section>
+      <NewBottomRow aFunc={downFunc} />
     </div>
   );
 }
